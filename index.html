@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>კურიer's ანაზღაურების კალკულატორი</title>
+    <title>კურიერის ანაზღაურების კალკულატორი</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -16,27 +16,29 @@
             align-items: center;
             height: 100vh;
         }
-
         .container {
             background: white;
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+            width: 80%; 
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            width: 80%;
-            gap: 30px;
+            justify-content: space-between;
         }
-
-        .form-container, .map-container {
+        .form-container {
             width: 48%;
             padding: 20px;
             background: #fff;
             border-radius: 10px;
             box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
         }
-
+        .map-container {
+            width: 48%;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            height: 400px;
+        }
         input {
             padding: 12px;
             margin: 10px 0;
@@ -45,7 +47,6 @@
             border-radius: 8px;
             font-size: 16px;
         }
-
         button {
             padding: 12px 25px;
             cursor: pointer;
@@ -56,30 +57,21 @@
             font-size: 18px;
             transition: 0.3s;
         }
-
         button:hover {
             background: #74efaa;
             color: black;
         }
-
         #result {
             margin-top: 20px;
             font-size: 22px;
             font-weight: bold;
             color: #2A9C64;
         }
-
         img {
             display: block;
             margin: 0 auto 20px auto;
             width: 200px;
         }
-
-        /* Map container */
-        .map-container {
-            height: 400px;
-        }
-
     </style>
     <!-- OpenStreetMap JavaScript Library -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -93,7 +85,7 @@
             <img src="https://i.ibb.co/mrvCMqFP/Bolt-Food-logo-horisontal-CMYK.png" alt="კომპანიის ლოგო">
             <h2>კურიერის ანაზღაურების კალკულატორი</h2>
             <label for="km">განვლილი კმ:</label>
-            <input type="number" id="km" placeholder="შეიყვანე კმ">
+            <input type="number" id="km" placeholder="შეიყვანე კმ" readonly>
             <br>
             <label for="rate">კმ-ის ფასი (₾):</label>
             <input type="text" id="rate" value="0.30" readonly>
@@ -145,11 +137,18 @@
             let rate = 0.30;  // 固定价格 0.30₾
             let multiplier = document.getElementById('multiplier').value;
 
+            console.log("შეყვანილი კმ:", km);
+            console.log("კმ-ის ფასი:", rate);
+            console.log("Multiplier:", multiplier);
+
             if (km && multiplier) {
                 let baseEarning = km * rate * multiplier;
 
+                console.log("დასაბალანსებელი თანხა:", baseEarning);
+
                 document.getElementById('result').innerText = `სულ ანაზღაურება: ₾${baseEarning.toFixed(2)}`;
             } else {
+                console.log("შეცდომა: ერთ-ერთი ველი ცარიელია");
                 document.getElementById('result').innerText = "გთხოვთ შეავსოთ ყველა ველი!";
             }
         }
