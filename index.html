@@ -1,117 +1,101 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="ka">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.4">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>კურიერის ანაზღაურების კალკულატორი</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0c2c1c, #2A9C64);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+            width: 350px;
+        }
+        input {
+            padding: 12px;
+            margin: 10px 0;
+            width: 90%;
+            border: 2px solid #2A9C64;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            padding: 12px 25px;
+            cursor: pointer;
+            background: #2A9C64;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #74efaa;
+            color: black;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2A9C64;
+        }
+        img {
+            display: block;
+            margin: 0 auto 20px auto;
+            width: 200px;
+        }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="ka"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;კურიერის ანაზღაურების კალკულატორი&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Arial', sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #0c2c1c, #2A9C64);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 100vh;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.container {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 40px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 350px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>input {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 10px 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 90%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid #2A9C64;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>button {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px 25px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #2A9C64;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: 0.3s;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>button:hover {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #74efaa;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: black;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>#result {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 22px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #2A9C64;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>img {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto 20px auto;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 200px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;img src="https://i.ibb.co/mrvCMqFP/Bolt-Food-logo-horisontal-CMYK.png" alt="კომპანიის ლოგო"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;კურიერის ანაზღაურების კალკულატორი&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label for="km"&gt;განვლილი კმ:&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="number" id="km" placeholder="შეიყვანე კმ"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label for="rate"&gt;კმ-ის ფასი (₾):&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="text" id="rate" value="0.30" readonly&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;label for="multiplier"&gt;Zone Multiplier:&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="number" id="multiplier" step="0.01" placeholder="Multiplier"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onclick="calculatePayment()"&gt;გამოთვლა&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="result"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>function calculatePayment() {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>let km = document.getElementById('km').value;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>let rate = 0.30;<span class="Apple-converted-space">  </span>// 固定价格 0.30₾</p>
-<p class="p1"><span class="Apple-converted-space">            </span>let multiplier = document.getElementById('multiplier').value;</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>console.log("შეყვანილი კმ:", km);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>console.log("კმ-ის ფასი:", rate);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>console.log("Multiplier:", multiplier);</p>
-<p class="p2"><span class="Apple-converted-space">            </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (km &amp;&amp; multiplier) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>let baseEarning = km * rate * multiplier;</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>console.log("დასაბალანსებელი თანხა:", baseEarning);</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('result').innerText = `სულ ანაზღაურება: ₾${baseEarning.toFixed(2)}`;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>console.log("შეცდომა: ერთ-ერთი ველი ცარიელია");</p>
-<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('result').innerText = "გთხოვთ შეავსოთ ყველა ველი!";</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+    <div class="container">
+        <img src="https://i.ibb.co/mrvCMqFP/Bolt-Food-logo-horisontal-CMYK.png" alt="კომპანიის ლოგო">
+        <h2>კურიერის ანაზღაურების კალკულატორი</h2>
+        <label for="km">განვლილი კმ:</label>
+        <input type="number" id="km" placeholder="შეიყვანე კმ">
+        <br>
+        <label for="rate">კმ-ის ფასი (₾):</label>
+        <input type="text" id="rate" value="0.30" readonly>
+        <br>
+        <label for="multiplier">Zone Multiplier:</label>
+        <input type="number" id="multiplier" step="0.01" placeholder="Multiplier">
+        <br>
+        <button onclick="calculatePayment()">გამოთვლა</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculatePayment() {
+            let km = document.getElementById('km').value;
+            let rate = 0.30;  // 固定价格 0.30₾
+            let multiplier = document.getElementById('multiplier').value;
+            
+            console.log("შეყვანილი კმ:", km);
+            console.log("კმ-ის ფასი:", rate);
+            console.log("Multiplier:", multiplier);
+            
+            if (km && multiplier) {
+                let baseEarning = km * rate * multiplier;
+                
+                console.log("დასაბალანსებელი თანხა:", baseEarning);
+                
+                document.getElementById('result').innerText = `სულ ანაზღაურება: ₾${baseEarning.toFixed(2)}`;
+            } else {
+                console.log("შეცდომა: ერთ-ერთი ველი ცარიელია");
+                document.getElementById('result').innerText = "გთხოვთ შეავსოთ ყველა ველი!";
+            }
+        }
+    </script>
 </body>
 </html>
