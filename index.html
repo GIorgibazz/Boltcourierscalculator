@@ -83,15 +83,19 @@
         <div class="form-container">
             <img src="https://i.ibb.co/mrvCMqFP/Bolt-Food-logo-horisontal-CMYK.png" alt="კომპანიის ლოგო">
             <h2>კურიერის ანაზღაურების კალკულატორი</h2>
+            
             <label for="km">განვლილი კმ:</label>
             <input type="number" id="km" placeholder="შეიყვანე კმ">
-            <br>
+
             <label for="rate">კმ-ის ფასი (₾):</label>
             <input type="text" id="rate" value="0.30" readonly>
-            <br>
+
             <label for="multiplier">Zone Multiplier:</label>
             <input type="number" id="multiplier" step="0.01" placeholder="Multiplier">
-            <br>
+
+            <label for="extraPay">დამატებითი ანაზღაურება (₾):</label>
+            <input type="number" id="extraPay" placeholder="მაგ: 2.50">
+
             <button onclick="calculatePayment()">გამოთვლა</button>
             <div id="result"></div>
         </div>
@@ -104,21 +108,17 @@
         // Initialize OpenStreetMap
         var map = L.map('map').setView([41.78559, 44.76392], 15);
 
-        // Add OpenStreetMap tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Create draggable "From" (Green) marker with default icon
         var startMarker = L.marker([41.78559, 44.76392], {draggable: true}).addTo(map)
             .bindPopup("<b>From</b><br> ეს არის თქვენი საწყისი მდებარეობა.")
             .openPopup();
 
-        // Create draggable "To" (Red) marker with default icon
         var endMarker = L.marker([41.794, 44.775], {draggable: true}).addTo(map)
             .bindPopup("<b>To</b><br> ეს არის თქვენი დანიშნულების ადგილი.");
 
-        // Function to calculate the distance using OSRM and update the km input field
         function updateDistance() {
             var startLatLng = startMarker.getLatLng();
             var endLatLng = endMarker.getLatLng();
@@ -129,27 +129,15 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.routes && data.routes.length > 0) {
-                        var distance = data.routes[0].legs[0].distance / 1000; // convert to km
+                        var distance = data.routes[0].legs[0].distance / 1000;
                         document.getElementById('km').value = distance.toFixed(2);
 
-                        // Clear any existing polylines before adding new ones
                         if (window.polyline) {
                             map.removeLayer(window.polyline);
                         }
 
-                        // Add the polyline to represent the route
-                        var route = L.polyline.decode(data.routes[0].geometry);
-                        window.polyline = L.polyline(route, {color: 'blue', weight: 4, opacity: 0.7}).addTo(map);
-
-                        // Add steps (directions) for showing turn-by-turn information
-                        var steps = data.routes[0].legs[0].steps;
-                        var instructions = "Directions:\n";
-                        steps.forEach(step => {
-                            instructions += `${step.maneuver.instruction}\n`;
-                        });
-
-                        // Show the directions in a formatted way
-                        document.getElementById('result').innerText = instructions;  // You can display this as a list or alert
+                        var route = L.Polyline.fromEncoded(data.routes[0].geometry);
+                        window.polyline = L.polyline(route.getLatLngs(), {color: 'blue', weight: 4, opacity: 0.7}).addTo(map);
                     } else {
                         alert("Could not calculate the route.");
                     }
@@ -157,26 +145,21 @@
                 .catch(err => console.log("Error:", err));
         }
 
-        // Update distance when markers are moved and adjust the polyline
-        startMarker.on('moveend', function() {
-            updateDistance();
-        });
-        endMarker.on('moveend', function() {
-            updateDistance();
-        });
+        startMarker.on('moveend', updateDistance);
+        endMarker.on('moveend', updateDistance);
 
-        // Initial distance update
         updateDistance();
 
-        // Calculate Payment
         function calculatePayment() {
             let km = parseFloat(document.getElementById('km').value);
-            let rate = 0.30;  // Fixed rate for km
-            let multiplier = document.getElementById('multiplier').value;
+            let rate = 0.30;
+            let multiplier = parseFloat(document.getElementById('multiplier').value);
+            let extraPay = parseFloat(document.getElementById('extraPay').value) || 0;
 
-            if (km && multiplier) {
+            if (!isNaN(km) && !isNaN(multiplier)) {
                 let baseEarning = km * rate * multiplier;
-                document.getElementById('result').innerText = `სულ ანაზღაურება: ₾${baseEarning.toFixed(2)}`;
+                let total = baseEarning + extraPay;
+                document.getElementById('result').innerText = `სულ ანაზღაურება: ₾${total.toFixed(2)}`;
             } else {
                 document.getElementById('result').innerText = "გთხოვთ შეავსოთ ყველა ველი!";
             }
