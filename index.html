@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>კურიერის ანაზღაურების კალკულატორი</title>
+    <title>კურიer's ანაზღაურების კალკულატორი</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -16,67 +16,8 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
-        }
-        .container {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
-            width: 80%;
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            z-index: 2;
-        }
-        .form-container {
-            width: 48%;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        .map-container {
-            width: 48%;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-            height: 400px;
             position: relative;
         }
-        input {
-            padding: 12px;
-            margin: 10px 0;
-            width: 90%;
-            border: 2px solid #2A9C64;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-        button {
-            padding: 12px 25px;
-            cursor: pointer;
-            background: #2A9C64;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            transition: 0.3s;
-        }
-        button:hover {
-            background: #74efaa;
-            color: black;
-        }
-        #result {
-            margin-top: 20px;
-            font-size: 22px;
-            font-weight: bold;
-            color: #2A9C64;
-        }
-        img {
-            display: block;
-            margin: 0 auto 20px auto;
-            width: 200px;
-        }
-        /* Background video */
         .background-video {
             position: absolute;
             top: 0;
@@ -86,15 +27,78 @@
             object-fit: cover;
             z-index: -1;
         }
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+            width: 75%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+        }
+        .form-container {
+            width: 48%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            margin-right: 10px;
+        }
+        .map-container {
+            width: 48%;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            height: 400px;
+            position: relative;
+            opacity: 0.9;
+        }
+        input {
+            padding: 6px;
+            margin: 6px 0;
+            width: 95%;
+            border: 2px solid #2A9C64;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        button {
+            padding: 8px 18px;
+            cursor: pointer;
+            background: #2A9C64;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #74efaa;
+            color: black;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2A9C64;
+        }
+        img {
+            display: block;
+            margin: 0 auto 15px auto;
+            width: 150px;
+        }
     </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
 
-    <!-- Background GIF -->
     <img src="https://s2.ezgif.com/tmp/ezgif-292dce972d6c75.gif" class="background-video" alt="Background GIF">
 
     <div class="container">
-        <!-- Form container -->
         <div class="form-container">
             <img src="https://i.ibb.co/mrvCMqFP/Bolt-Food-logo-horisontal-CMYK.png" alt="კომპანიის ლოგო">
             <h2>კურიერის ანაზღაურების კალკულატორი</h2>
@@ -115,12 +119,10 @@
             <div id="result"></div>
         </div>
 
-        <!-- Map container -->
         <div class="map-container" id="map"></div>
     </div>
 
     <script>
-        // Initialize OpenStreetMap
         var map = L.map('map').setView([41.78559, 44.76392], 15);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
