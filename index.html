@@ -10,7 +10,7 @@
             text-align: center;
             margin: 0;
             padding: 0;
-            background-image: url('https://i.ibb.co/ds9tmFKt/Group-1-9.png'); /* ახალი ბექგრაუნდი */
+            background-image: url('https://i.ibb.co/ds9tmFKt/Group-1-9.png');
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -19,6 +19,7 @@
             overflow: hidden;
             position: relative;
         }
+
         .container {
             background: rgba(255, 255, 255, 0.85);
             padding: 15px;
@@ -31,8 +32,8 @@
             position: relative;
             z-index: 2;
             max-width: 800px;
-            display: none;  /* Initially hidden */
         }
+
         .form-container {
             width: 45%;
             padding: 12px;
@@ -41,6 +42,7 @@
             box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
             margin-right: 8px;
         }
+
         .map-container {
             width: 45%;
             background: rgba(255, 255, 255, 0.7);
@@ -49,8 +51,8 @@
             height: 350px;
             position: relative;
             opacity: 0.9;
-            margin-top: 15px;
         }
+
         input {
             padding: 5px;
             margin: 5px 0;
@@ -59,6 +61,7 @@
             border-radius: 6px;
             font-size: 13px;
         }
+
         button {
             padding: 6px 14px;
             cursor: pointer;
@@ -69,50 +72,90 @@
             font-size: 13px;
             transition: 0.3s;
         }
+
         button:hover {
             background: #74efaa;
             color: black;
         }
+
         #result {
             margin-top: 15px;
             font-size: 18px;
             font-weight: bold;
             color: #2A9C64;
         }
+
         img {
             display: block;
             margin: 0 auto 12px auto;
             width: 130px;
         }
+
         .address-fields {
             margin-top: 8px;
             display: none;
         }
-        .code-container {
-            text-align: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.85);
+
+        /* Password overlay */
+        #passwordScreen {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .password-box {
+            background: white;
+            padding: 30px;
             border-radius: 12px;
-            width: 300px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);
+            text-align: center;
+        }
+
+        .password-box input {
+            padding: 10px;
+            font-size: 16px;
+            width: 200px;
+            border: 2px solid #2A9C64;
+            border-radius: 8px;
+        }
+
+        .password-box button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 15px;
+        }
+
+        #passError {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
         }
     </style>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <!-- Add Polyline decoding library here -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/polyline/1.0.0/polyline.min.js"></script> <!-- Polyline decoding library -->
 </head>
 <body>
 
-<div class="code-container" id="codeContainer">
-    <img src="https://i.ibb.co/mrvCMqFP/Bolt-Food-logo-horisontal-CMYK.png" alt="კომპანიის ლოგო">
-    <h2>შეიყვანეთ კოდი</h2>
-    <input type="password" id="inputCode" placeholder="შეიყვანეთ კოდი">
-    <button onclick="verifyCode()">გადასვლა</button>
-    <p id="error-message" style="color: red; display: none;">არასწორი კოდი! სცადეთ კიდევ ერთხელ.</p>
+<!-- Password Protection Overlay -->
+<div id="passwordScreen">
+    <div class="password-box">
+        <h2>წვდომისთვის საჭიროა კოდის შეყვანა 🔐</h2>
+        <p>გთხოვთ შეიყვანოთ წვდომის კოდი:</p>
+        <input type="password" id="accessCode" placeholder="პაროლი...">
+        <br>
+        <button onclick="checkPassword()">შესვლა</button>
+        <div id="passError"></div>
+    </div>
 </div>
 
-<div class="container" id="calculatorContainer">
+<div class="container">
     <div class="form-container">
+        <img src="https://i.ibb.co/mrvCMqFP/Bolt-Food-logo-horisontal-CMYK.png" alt="კომპანიის ლოგო">
         <h2>კურიერის ანაზღაურების კალკულატორი</h2>
 
         <button onclick="toggleAddresses()">მისამართები</button>
@@ -147,16 +190,16 @@
 </div>
 
 <script>
-    const correctCode = "10101999";  // Correct code
+    // Password protection logic
+    function checkPassword() {
+        const correctPassword = "10101999";
+        const input = document.getElementById("accessCode").value;
+        const errorDiv = document.getElementById("passError");
 
-    // Function to handle the code verification
-    function verifyCode() {
-        const userCode = document.getElementById("inputCode").value;
-        if (userCode === correctCode) {
-            document.getElementById("codeContainer").style.display = "none";  // Hide code input
-            document.getElementById("calculatorContainer").style.display = "flex";  // Show calculator
+        if (input === correctPassword) {
+            document.getElementById("passwordScreen").style.display = "none";
         } else {
-            document.getElementById("error-message").style.display = "block";  // Show error message
+            errorDiv.innerText = "პაროლი არასწორია 😬 სცადე თავიდან!";
         }
     }
 
@@ -190,9 +233,8 @@
                         map.removeLayer(window.polyline);
                     }
 
-                    // Decode polyline using polyline library
-                    var decodedPath = polyline.decode(data.routes[0].geometry);
-                    window.polyline = L.polyline(decodedPath, {color: 'blue', weight: 4, opacity: 0.7}).addTo(map);
+                    var route = L.Polyline.fromEncoded(data.routes[0].geometry);
+                    window.polyline = L.polyline(route.getLatLngs(), {color: 'blue', weight: 4, opacity: 0.7}).addTo(map);
                 } else {
                     alert("Could not calculate the route.");
                 }
@@ -251,11 +293,18 @@
         let km = parseFloat(document.getElementById('km').value);
         let rate = 0.30;
         let multiplier = parseFloat(document.getElementById('multiplier').value);
-        let extraPay = parseFloat(document.getElementById('extraPay').value);
+        let extraPay = parseFloat(document.getElementById('extraPay').value) || 0;
 
-        let totalPay = (km * rate * multiplier) + extraPay;
-        document.getElementById('result').innerText = `ჯამი: ₾${totalPay.toFixed(2)}`;
+        if (!isNaN(km) && !isNaN(multiplier)) {
+            let baseEarning = km * rate * multiplier;
+            let total = baseEarning + extraPay;
+            document.getElementById('result').innerText = `სულ ანაზღაურება: ₾${total.toFixed(2)}`;
+        } else {
+            document.getElementById('result').innerText = "გთხოვთ შეავსოთ ყველა ველი!";
+        }
     }
 </script>
+
 </body>
 </html>
+<link rel="icon" href="https://i.ibb.co/G4qMQ3C/favicon.ico" type="image/x-icon">
