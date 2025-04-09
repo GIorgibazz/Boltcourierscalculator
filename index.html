@@ -101,11 +101,13 @@
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(0, 0, 0, 0.4); /* Backdrop darker for contrast */
             z-index: 9999;
             display: flex;
             justify-content: center;
             align-items: center;
+            background-image: url('https://i.ibb.co/ds9tmFKt/Group-1-9.png'); /* Same background as the calculator */
+            background-size: cover;
         }
 
         .password-box {
@@ -144,7 +146,8 @@
 <!-- Password Protection Overlay -->
 <div id="passwordScreen">
     <div class="password-box">
-        <h2>წვდომისთვის საჭიროა კოდის შეყვანა 🔐</h2>
+        <h2>წვდომისთვის საჭიროა კოდის შეყვანა 🔐
+</h2>
         <p>გთხოვთ შეიყვანოთ წვდომის კოდი:</p>
         <input type="password" id="accessCode" placeholder="პაროლი...">
         <br>
@@ -156,7 +159,7 @@
 <div class="container">
     <div class="form-container">
         <img src="https://i.ibb.co/mrvCMqFP/Bolt-Food-logo-horisontal-CMYK.png" alt="კომპანიის ლოგო">
-        <h2>კურიერის ანაზღაურების კალკულატორი</h2>
+        <h2>კურიer's ანაზღაურების კალკულატორი</h2>
 
         <button onclick="toggleAddresses()">მისამართები</button>
 
