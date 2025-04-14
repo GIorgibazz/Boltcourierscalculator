@@ -96,17 +96,16 @@
             display: none;
         }
 
-        /* Password overlay */
         #passwordScreen {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* Backdrop darker for contrast */
+            background: rgba(0, 0, 0, 0.4);
             z-index: 9999;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-image: url('https://i.ibb.co/ds9tmFKt/Group-1-9.png'); /* Same background as the calculator */
+            background-image: url('https://i.ibb.co/ds9tmFKt/Group-1-9.png');
             background-size: cover;
         }
 
@@ -138,7 +137,6 @@
             margin-top: 10px;
         }
 
-        /* Added styles for checkboxes */
         .checkbox-container {
             display: flex;
             justify-content: center;
@@ -153,7 +151,7 @@
         }
 
         .checkbox-container input {
-            accent-color: #2A9C64; /* Set the checkbox color */
+            accent-color: #2A9C64;
         }
     </style>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -164,8 +162,7 @@
 <!-- Password Protection Overlay -->
 <div id="passwordScreen">
     <div class="password-box">
-        <h2>წვდომისთვის საჭიროა კოდის შეყვანა 🔐
-</h2>
+        <h2>წვდომისთვის საჭიროა კოდის შეყვანა 🔐</h2>
         <p>გთხოვთ შეიყვანოთ წვდომის კოდი:</p>
         <input type="password" id="accessCode" placeholder="პაროლი...">
         <br>
@@ -206,7 +203,6 @@
         <button onclick="calculatePayment()">გამოთვლა</button>
         <div id="result"></div>
 
-        <!-- Pickup and Dropoff checkboxes -->
         <div class="checkbox-container">
             <div>
                 <input type="checkbox" id="pickup" checked onclick="calculatePayment()">
@@ -223,7 +219,6 @@
 </div>
 
 <script>
-    // Password protection logic
     function checkPassword() {
         const correctPassword = "10101999";
         const input = document.getElementById("accessCode").value;
@@ -320,7 +315,9 @@
         fields.style.display = fields.style.display === "none" ? "block" : "none";
     }
 
-    updateDistance();
+    window.onload = function() {
+        updateDistance(); // პაროლი overlay ახლა მუშაობს სწორად
+    };
 
     function calculatePayment() {
         let km = parseFloat(document.getElementById('km').value);
@@ -331,11 +328,11 @@
         let pickupChecked = document.getElementById("pickup").checked;
         let dropoffChecked = document.getElementById("dropoff").checked;
 
-        let pickupBase = 1; // GEL
-        let dropoffBase = 1; // GEL
+        let pickupBase = 1;
+        let dropoffBase = 1;
 
-        let pickupPay = pickupChecked ? pickupBase : 0;
-        let dropoffPay = dropoffChecked ? dropoffBase : 0;
+        let pickupPay = pickupChecked ? pickupBase * multiplier : 0;
+        let dropoffPay = dropoffChecked ? dropoffBase * multiplier : 0;
 
         if (!isNaN(km) && !isNaN(multiplier)) {
             let baseEarning = km * rate * multiplier;
@@ -349,4 +346,3 @@
 
 </body>
 </html>
-<link rel="icon" href="https://i.ibb.co/G4qMQ3C/favicon.ico" type="image/x-icon">
